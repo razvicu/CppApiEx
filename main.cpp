@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	QObject::connect(reply, &QNetworkReply::finished, [=]() {
 		if (reply->error()) {
 			qDebug() << "Error reading data";
+			delete manager;
 			return;
 		}
 		QByteArray response = reply->readAll();
