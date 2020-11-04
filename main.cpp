@@ -14,13 +14,12 @@ int main(int argc, char *argv[])
 	QUrl url = QUrl("https://jsonplaceholder.typicode.com/todos");
 	QNetworkRequest request(url);
 
-	QNetworkAccessManager *manager = new QNetworkAccessManager();
+	QNetworkAccessManager manager{};
 	QNetworkReply *reply = manager->get(request);
 
 	QObject::connect(reply, &QNetworkReply::finished, [=]() {
 		if (reply->error()) {
 			qDebug() << "Error reading data";
-			delete manager;
 			return;
 		}
 		QByteArray response = reply->readAll();
@@ -44,8 +43,6 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-
-		delete manager;
 	});
 
 	return a.exec();
