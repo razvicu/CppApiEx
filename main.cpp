@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	QNetworkRequest request(url);
 
 	QNetworkAccessManager manager{};
-	QNetworkReply *reply = manager->get(request);
+	QNetworkReply *reply = manager.get(request);
 
 	QObject::connect(reply, &QNetworkReply::finished, [=]() {
 		if (reply->error()) {
